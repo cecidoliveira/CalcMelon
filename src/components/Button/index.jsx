@@ -1,8 +1,9 @@
 import { Bnt } from "./ButtonStyles"
 
-const Button = ({ val }) => {
+const Button = ({val, click}) => {
+  
   return (
-    <Bnt type="button" value={val} $cor={val == "=" ? "#FE283A" : "#FEFEFE"} />
+    <Bnt type="button" value={val} $cor={val == "=" ? "#FE283A" : "#FEFEFE"} onClick={click}  />
   )
 }
 
