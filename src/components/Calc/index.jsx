@@ -7,7 +7,7 @@ const Calc = () => {
     const {visor, setVisor, firstNumber, setFirstNumber, zeraVisor, limpaVisor, zeraFirstNumber, setOpcao, opcao, zeraOpcao } = useCalcStore(state => state)
 
     function handleValue(val) {
-        var num = visor === "0" ? val : visor + val
+        var num = visor + val
         setVisor(num)
     }
 
@@ -103,7 +103,7 @@ const Calc = () => {
             console.log("nao existe raiz de numero negativo")
             zeraVisor()
         }else{
-            var raiz = Number(visor) ** 2
+            var raiz = Math.sqrt(Number(visor))
             setVisor(String(raiz))
         }
     }

@@ -1,7 +1,7 @@
 import { create } from 'zustand'
 
 export const useCalcStore = create((set) => ({
-  visor: "0",
+  visor: "",
 
   setVisor: (num) =>set(() =>({
     visor: num
