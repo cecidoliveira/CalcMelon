@@ -17,6 +17,7 @@ export const DivCalcBody = styled.div`
     }
 `
 export const CalcVisor = styled.div`
+    overflow-x: hidden ;
     width: 41rem;
     height: 7.5625rem;
     margin: 3.5rem auto 3rem;

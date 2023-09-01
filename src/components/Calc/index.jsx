@@ -16,10 +16,11 @@ const Calc = () => {
 
         if(firstNumber != ""){
             var sum = Number(firstNumber) + Number(visor)
-            setFirstNumber(String(sum))
+            let fsum = sum.toFixed(2);
+            setFirstNumber(String(fsum))
 
             if(sinal === "="){
-                setVisor(String(sum))
+                setVisor(String(fsum))
                 zeraFirstNumber()
             }else{
                 limpaVisor()
@@ -36,10 +37,11 @@ const Calc = () => {
 
         if(firstNumber != ""){
             var sub = Number(firstNumber) - Number(visor)
-            setFirstNumber(String(sub))
+            let fsub = sub.toFixed(2);
+            setFirstNumber(String(fsub))
 
             if(sinal === "="){
-                setVisor(String(sub))
+                setVisor(String(fsub))
                 zeraFirstNumber()
             }else{
                 limpaVisor()
@@ -56,10 +58,11 @@ const Calc = () => {
 
         if(firstNumber != ""){
             var multi = Number(firstNumber) * Number(visor)
-            setFirstNumber(String(multi))
+            let fmulti = multi.toFixed(2);
+            setFirstNumber(String(fmulti))
 
             if(sinal === "="){
-                setVisor(String(multi))
+                setVisor(String(fmulti))
                 zeraFirstNumber()
             }else{
                 limpaVisor()
@@ -77,10 +80,11 @@ const Calc = () => {
         if(firstNumber != ""){
            if(visor != "0"){
                 var div = Number(firstNumber) / Number(visor)
-                setFirstNumber(String(div.toFixed(2)))
+                let fdiv = div.toFixed(2);
+                setFirstNumber(String(fdiv))
 
                 if(sinal === "="){
-                    setVisor(String(div))
+                    setVisor(String(fdiv))
                     zeraFirstNumber()
                 }else{
                     limpaVisor()
@@ -104,7 +108,8 @@ const Calc = () => {
             zeraVisor()
         }else{
             var raiz = Math.sqrt(Number(visor))
-            setVisor(String(raiz))
+            let fraiz = raiz.toFixed(2);
+            setVisor(String(fraiz))
         }
     }
 
