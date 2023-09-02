@@ -1,6 +1,7 @@
 import Button from "../Button"
 import { DivCalcBody, CalcVisor, DivCalcBnts } from "./CalcStyles"
 import { useCalcStore } from '../../Store/Calc';
+import { formatNumber } from "./formatNumber";
 
 const Calc = () => {
     
@@ -16,11 +17,11 @@ const Calc = () => {
 
         if(firstNumber != ""){
             var sum = Number(firstNumber) + Number(visor)
-            let fsum = sum.toFixed(2);
-            setFirstNumber(String(fsum))
+            sum = formatNumber(sum)
+            setFirstNumber(String(sum))
 
             if(sinal === "="){
-                setVisor(String(fsum))
+                setVisor(String(sum))
                 zeraFirstNumber()
             }else{
                 limpaVisor()
@@ -37,11 +38,11 @@ const Calc = () => {
 
         if(firstNumber != ""){
             var sub = Number(firstNumber) - Number(visor)
-            let fsub = sub.toFixed(2);
-            setFirstNumber(String(fsub))
+            sub = formatNumber(sub)
+            setFirstNumber(String(sub))
 
             if(sinal === "="){
-                setVisor(String(fsub))
+                setVisor(String(sub))
                 zeraFirstNumber()
             }else{
                 limpaVisor()
@@ -58,11 +59,12 @@ const Calc = () => {
 
         if(firstNumber != ""){
             var multi = Number(firstNumber) * Number(visor)
-            let fmulti = multi.toFixed(2);
-            setFirstNumber(String(fmulti))
+            multi = formatNumber(multi)
+            setFirstNumber(String(multi))
+
 
             if(sinal === "="){
-                setVisor(String(fmulti))
+                setVisor(String(multi))
                 zeraFirstNumber()
             }else{
                 limpaVisor()
@@ -80,11 +82,12 @@ const Calc = () => {
         if(firstNumber != ""){
            if(visor != "0"){
                 var div = Number(firstNumber) / Number(visor)
-                let fdiv = div.toFixed(2);
-                setFirstNumber(String(fdiv))
+                div = formatNumber(div)
+                setFirstNumber(String(div))
+
 
                 if(sinal === "="){
-                    setVisor(String(fdiv))
+                    setVisor(String(div))
                     zeraFirstNumber()
                 }else{
                     limpaVisor()
@@ -108,8 +111,8 @@ const Calc = () => {
             zeraVisor()
         }else{
             var raiz = Math.sqrt(Number(visor))
-            let fraiz = raiz.toFixed(2);
-            setVisor(String(fraiz))
+            raiz = formatNumber(raiz)
+            setVisor(String(raiz))
         }
     }
 
