@@ -2,9 +2,11 @@ import Button from "../Button"
 import { DivCalcBody, CalcVisor, DivCalcBnts } from "./CalcStyles"
 import { useCalcStore } from '../../Store/Calc';
 import { formatNumber } from "./formatNumber";
+import { ChakraProvider, useToast, Box } from '@chakra-ui/react'
 
 const Calc = () => {
-    
+    const toast = useToast()
+
     const {visor, setVisor, firstNumber, setFirstNumber, zeraVisor, limpaVisor, zeraFirstNumber, setOpcao, opcao, zeraOpcao } = useCalcStore(state => state)
 
     function handleValue(val) {
@@ -93,7 +95,13 @@ const Calc = () => {
                     limpaVisor()
             }
             }else{
-                //informação para o usuario (a fazer)
+                //informação para o usuario
+                toast({
+                    description: "nao é possivel dividir um numero por 0",
+                    status: "warning",
+                    duration: 5000,
+                    isClosable: true,
+                  })
                 console.log("nao é possivel dividir um numero por 0")
                 zeraVisor()
            }
@@ -106,7 +114,13 @@ const Calc = () => {
 
     function handleRaiz() {
         if(Number(visor) < 0 ){
-            //informação para o usuario a fazer
+            //informação para o usuario 
+            toast({
+                description: "nao existe raiz de numero negativo",
+                status: "warning",
+                duration: 5000,
+                isClosable: true,
+            })
             console.log("nao existe raiz de numero negativo")
             zeraVisor()
         }else{
@@ -138,44 +152,46 @@ const Calc = () => {
     }
 
     return (
-        <DivCalcBody>
-            <CalcVisor>
-                <p>{visor}</p>
-            </CalcVisor>
-            <DivCalcBnts>
-                <div className="col1">
-                    <div>
-                        <Button val="1" click={()=> handleValue("1")}/>
-                        <Button val="2" click={()=> handleValue("2")}/>
-                        <Button val="3" click={()=> handleValue("3")}/>
-                        <Button val="-" click={()=> handleSubNumbers("-")}/>
+        <ChakraProvider>
+            <DivCalcBody>
+                <CalcVisor>
+                    <p>{visor}</p>
+                </CalcVisor>
+                <DivCalcBnts>
+                    <div className="col1">
+                        <div>
+                            <Button val="1" click={()=> handleValue("1")}/>
+                            <Button val="2" click={()=> handleValue("2")}/>
+                            <Button val="3" click={()=> handleValue("3")}/>
+                            <Button val="-" click={()=> {visor == "" ? handleValue("-") : handleSubNumbers("-")}}/>
+                        </div>
+                        <div>
+                            <Button val="4" click={()=> handleValue("4")}/>
+                            <Button val="5" click={()=> handleValue("5")}/>
+                            <Button val="6" click={()=> handleValue("6")}/>
+                            <Button val="+" click={()=> handleAddNumbers("+")}/>
+                        </div>
+                        <div>
+                            <Button val="7" click={()=> handleValue("7")}/>
+                            <Button val="8" click={()=> handleValue("8")}/>
+                            <Button val="9" click={()=> handleValue("9")}/>
+                            <Button val="x" click={()=> handleMultiNumbers("*")}/>
+                        </div>
+                        <div>
+                            <Button val="√" click={()=> handleRaiz()}/>
+                            <Button val="0" click={()=> handleValue("0")}/>
+                            <Button val="." click={()=> handleValue(".")}/>
+                            <Button val="/" click={()=> handleDivNumbers("/")}/>
+                        </div>
                     </div>
-                    <div>
-                        <Button val="4" click={()=> handleValue("4")}/>
-                        <Button val="5" click={()=> handleValue("5")}/>
-                        <Button val="6" click={()=> handleValue("6")}/>
-                        <Button val="+" click={()=> handleAddNumbers("+")}/>
+                    <div className="col2">
+                        <Button val="C" click={()=> zeraVisor()}/>
+                        <Button val="=" click={()=> handleResultVisor()}/>
                     </div>
-                    <div>
-                        <Button val="7" click={()=> handleValue("7")}/>
-                        <Button val="8" click={()=> handleValue("8")}/>
-                        <Button val="9" click={()=> handleValue("9")}/>
-                        <Button val="x" click={()=> handleMultiNumbers("*")}/>
-                    </div>
-                    <div>
-                        <Button val="√" click={()=> handleRaiz()}/>
-                        <Button val="0" click={()=> handleValue("0")}/>
-                        <Button val="." click={()=> handleValue(".")}/>
-                        <Button val="/" click={()=> handleDivNumbers("/")}/>
-                    </div>
-                </div>
-                <div className="col2">
-                    <Button val="C" click={()=> zeraVisor()}/>
-                    <Button val="=" click={()=> handleResultVisor()}/>
-                </div>
-            </DivCalcBnts>
+                </DivCalcBnts>
 
-        </DivCalcBody>
+            </DivCalcBody>
+        </ChakraProvider>
     )
 }
 
